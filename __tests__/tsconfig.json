@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": false,
+    "lib": ["es2017", "dom"],
+    "experimentalDecorators": true,
+    "typeRoots": ["../@types", "../node_modules/@types"]
+  }
+}

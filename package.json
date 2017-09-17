@@ -1,0 +1,37 @@
+{
+  "name": "ts-module-boilerplate",
+  "private": true,
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/deptno/ts-module-boilerplate.git",
+  "author": "bglee <deptno@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^20.0.8",
+    "jest": "^21.1.0",
+    "typescript": "^2.5.2"
+  },
+  "scripts": {
+    "prepublish": "tsc --outDir dist --declaration",
+    "test": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/*.(test|spec).(ts|tsx)"
+    ]
+  },
+  "dependencies": {
+    "@types/jsdom": "^11.0.2",
+    "jsdom": "^11.2.0",
+    "node-fetch": "^1.7.3"
+  }
+}
