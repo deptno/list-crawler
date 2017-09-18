@@ -5,32 +5,53 @@ const list = Array.from
 
 interface CrawlerResult {
   name: string
+  url: string
   tables: Table[]
 }
-type Table = any[]
+interface Table extends Array<Row> {}
+interface Row {
+  제목: string
+}
+
 interface CrawlerArgs {
   [name: string]: {
     url: string
-    tag: string
+    selector: string
+    noHeader?: boolean
   }
 }
 
 export function crawler(target: CrawlerArgs): Promise<CrawlerResult>[] {
   return Object.entries(target)
-    .map(async ([name, {url, tag}]) => {
+    .map(async ([name, {url, selector, noHeader}]) => {
       const response = await fetch(url)
       const text     = await response.text()
       const dom      = new jsdom.JSDOM(text)
-      const tables   = list(dom.window.document.body.querySelectorAll(tag))
+      const tables   = list(dom.window.document.body.querySelectorAll(selector))
         .map(table =>
-          list(table.getElementsByTagName(getSubTag(tag)))
+          list(table.getElementsByTagName(getSubTag(selector)))
             .map(tr => list(tr.children)
               .map(flatMapContent)
             )
+            .filter(column => column.length > 0)
+            .map((columns, index, array) => {
+              return noHeader
+                ? {
+                  '제목': columns[0]
+                }
+                : array[0]
+                  .reduce((ret, header, index) => {
+                    ret[header] = columns[index]
+                    return ret
+                  }, {} as Row)
+            })
         )
+        .filter(columns => columns.length > 0)
+        .filter((_, index) => !noHeader || index > 0)
 
       return {
         name,
+        url,
         tables
       }
     })
