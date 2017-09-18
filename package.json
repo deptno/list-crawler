@@ -10,12 +10,14 @@
   "devDependencies": {
     "@types/jest": "^20.0.8",
     "jest": "^21.1.0",
+    "ts-loader": "^2.3.7",
     "typescript": "^2.5.2",
-    "webpack": "^3.6.0"
+    "webpack": "^3.6.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
     "prepublish": "tsc --outDir dist --declaration",
-    "webpack": "webpack",
+    "build": "webpack",
     "test": "jest"
   },
   "jest": {
