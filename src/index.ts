@@ -8,16 +8,22 @@ interface CrawlerResult {
   tables: Table[]
 }
 type Table = any[]
+interface CrawlerArgs {
+  [name: string]: {
+    url: string
+    tag: string
+  }
+}
 
-export function crawler(target: object): Promise<CrawlerResult>[] {
+export function crawler(target: CrawlerArgs): Promise<CrawlerResult>[] {
   return Object.entries(target)
-    .map(async ([name, url]) => {
+    .map(async ([name, {url, tag}]) => {
       const response = await fetch(url)
       const text     = await response.text()
       const dom      = new jsdom.JSDOM(text)
-      const tables   = list(dom.window.document.body.getElementsByTagName('table'))
+      const tables   = list(dom.window.document.body.querySelectorAll(tag))
         .map(table =>
-          list(table.getElementsByTagName('tr'))
+          list(table.getElementsByTagName(getSubTag(tag)))
             .map(tr => list(tr.children)
               .map(flatMapContent)
             )
@@ -30,6 +36,19 @@ export function crawler(target: object): Promise<CrawlerResult>[] {
     })
 }
 
+function getSubTag(query: string): string {
+  const selectors = query.split(' ')
+  const selector = selectors[selectors.length - 1]
+  switch(selector) {
+    case 'table':
+      return 'tr'
+    case 'ul':
+    case 'ol':
+      return 'li'
+    default:
+      throw new Error('unsupported type')
+  }
+}
 function flatMapContent(element): string {
   if (element.childNodes.length > 0) {
     return list(element.childNodes)
