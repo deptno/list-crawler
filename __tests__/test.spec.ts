@@ -17,7 +17,6 @@ it('test', async (done) => {
     }
   }
   const result = await Promise.all(crawler(target))
-  console.log(JSON.stringify(result, null, 2))
   expect(Array.isArray(result[0].tables[0])).toEqual(true)
   done()
 })
