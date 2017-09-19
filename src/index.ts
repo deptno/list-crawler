@@ -45,6 +45,7 @@ export function crawler(target: CrawlerArgs): Promise<CrawlerResult>[] {
                     return ret
                   }, {} as Row)
             })
+            .slice(noHeader ? 0 : 1)
         )
         .filter(columns => columns.length > 0)
         .filter((_, index) => !noHeader || index > 0)

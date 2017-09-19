@@ -1,4 +1,4 @@
-import {crawler} from '../src/index'
+import {crawler} from '../dist/index'
 
 it('test', async (done) => {
   const target = {
