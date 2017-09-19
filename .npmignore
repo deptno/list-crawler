@@ -3,7 +3,10 @@
 .vscode/
 node_modules/
 src
-CHANGELOG.md
 **/*.map
 src/**/*.ts
-index.ts
+preprocessor.js
+webpack.config.js
+yarn.lock
+tsconfig.json
+__tests__

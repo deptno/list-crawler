@@ -3,17 +3,17 @@ import fetch from 'node-fetch'
 
 const list = Array.from
 
-interface CrawlerResult {
+export interface CrawlerResult {
   name: string
   url: string
   tables: Table[]
 }
-interface Table extends Array<Row> {}
-interface Row {
+export interface Table extends Array<Row> {}
+export interface Row {
   제목: string
 }
 
-interface CrawlerArgs {
+export interface CrawlerArgs {
   [name: string]: {
     url: string
     selector: string
