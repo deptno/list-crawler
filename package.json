@@ -1,6 +1,6 @@
 {
   "name": "list-crawler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/deptno/ts-module-boilerplate.git",
@@ -15,7 +15,6 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "prepublish": "tsc --outDir dist --declaration",
     "build": "webpack",
     "test": "jest"
   },
