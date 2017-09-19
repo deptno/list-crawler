@@ -8,7 +8,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^20.0.8",
-    "@types/mongodb": "^2.2.11",
     "jest": "^21.1.0",
     "ts-loader": "^2.3.7",
     "typescript": "^2.5.2",
@@ -36,7 +35,6 @@
   "dependencies": {
     "@types/jsdom": "^11.0.2",
     "jsdom": "^11.2.0",
-    "mongodb": "^2.2.31",
     "node-fetch": "^1.7.3"
   }
 }
