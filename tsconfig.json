@@ -6,7 +6,7 @@
     "lib": ["es2017", "dom"],
     "experimentalDecorators": true,
     "declaration": true,
-    "declarationDir": ".",
+    "outDir": "dist",
     "typeRoots": ["@types", "node_modules/@types"]
   },
   "exclude": [
